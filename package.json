@@ -1,0 +1,46 @@
+{
+  "name": "@alifelived/react-native-audio-record",
+  "version": "1.1.1",
+  "description": "Audio record buffers for React Native",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": {
+    "name": "max_ckelly",
+    "email": "maxckel@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aLifeLived/react-native-audio-record.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npm run lint:eslint && npm run lint:types",
+    "lint:eslint": "eslint src/ --ext .js,.ts,.tsx",
+    "lint:types": "tsc",
+    "build": "tsc"
+  },
+  "keywords": [
+    "react-native",
+    "audio",
+    "record"
+  ],
+  "files": [
+    "lib",
+    "android",
+    "ios"
+  ],
+  "devDependencies": {
+    "@types/react-native": "^0.65.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "prettier": "^1.12.0",
+    "react": "^17.0.2",
+    "react-native": "^0.65.1",
+    "typescript": "^4.4.2"
+  }
+}
