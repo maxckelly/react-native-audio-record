@@ -6,9 +6,10 @@ import {
 import { isNativeModuleLoaded } from './helpers';
 const { RNAudioRecord } = NativeModules;
 let EventEmitter: NativeEventEmitter;
+let AudioRecord: any;
 
 if (isNativeModuleLoaded(RNAudioRecord)) {
-	EventEmitter = new NativeEventEmitter(RNAudioRecord);
+  EventEmitter = new NativeEventEmitter(RNAudioRecord);
 }
 
 export interface Options {
@@ -25,7 +26,7 @@ export interface Options {
    * - `6`
    */
   audioSource?: number;
- }
+}
 
 export enum AudioRecordEvent {
   data = 'data',
@@ -44,14 +45,7 @@ export interface PlaybackOptions {
   elapsedSeconds: number;
 }
 
-const initRecorder = (options: Options, formatCallback:any) => {
-  recorderOn(AudioRecordEvent.format, formatCallback);
-  RNAudioRecord.initialise(options);
-}
-const recorderStart = (playbackOptions?: PlaybackOptions): void =>
-  RNAudioRecord.start(playbackOptions);
-const recorderStop = (): Promise<string> => RNAudioRecord.stop();
-const recorderOn = (event: any, callback: any): EmitterSubscription => {
+AudioRecord.recorderOn = (event: any, callback: any): EmitterSubscription => {
   const nativeEvent = eventsMap[event];
   if (!nativeEvent) {
     throw new Error('Invalid event');
@@ -60,4 +54,14 @@ const recorderOn = (event: any, callback: any): EmitterSubscription => {
   return EventEmitter.addListener(nativeEvent, callback);
 };
 
-export { initRecorder, recorderStart, recorderStop, recorderOn };
+AudioRecord.initRecorder = (options: Options, formatCallback: any) => {
+  AudioRecord.recorderOn(AudioRecordEvent.format, formatCallback);
+  RNAudioRecord.initialise(options);
+};
+
+AudioRecord.recorderStart = (playbackOptions?: PlaybackOptions): void =>
+  RNAudioRecord.start(playbackOptions);
+
+AudioRecord.recorderStop = (): Promise<string> => RNAudioRecord.stop();
+
+export default AudioRecord;

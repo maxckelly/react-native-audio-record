@@ -1,4 +1,4 @@
-import { EmitterSubscription } from 'react-native';
+declare let AudioRecord: any;
 export interface Options {
     sampleRate: number;
     /**
@@ -23,8 +23,4 @@ export interface PlaybackOptions {
     allowHaptics?: boolean;
     elapsedSeconds: number;
 }
-declare const initRecorder: (options: Options, formatCallback: any) => void;
-declare const recorderStart: (playbackOptions?: PlaybackOptions) => void;
-declare const recorderStop: () => Promise<string>;
-declare const recorderOn: (event: any, callback: any) => EmitterSubscription;
-export { initRecorder, recorderStart, recorderStop, recorderOn };
+export default AudioRecord;
