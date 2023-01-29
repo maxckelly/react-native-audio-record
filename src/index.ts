@@ -3,8 +3,13 @@ import {
   NativeEventEmitter,
   EmitterSubscription,
 } from 'react-native';
+import { isNativeModuleLoaded } from './helpers';
 const { RNAudioRecord } = NativeModules;
-const EventEmitter = new NativeEventEmitter(RNAudioRecord);
+let EventEmitter: NativeEventEmitter;
+
+if (isNativeModuleLoaded(RNAudioRecord)) {
+	EventEmitter = new NativeEventEmitter(RNAudioRecord);
+}
 
 export interface Options {
   sampleRate: number;
